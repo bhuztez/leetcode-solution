@@ -174,6 +174,9 @@ def main():
     @task("submit {filename}")
     async def submit(filename):
         data = preprocess(filename).encode()
+        pid = filename.split("-", 1)[1]
+        if pid.endswith(".py"):
+            pid = pid[:-3]
 
         token = await profile.submit(oj, pid, env, data)
         status = None
