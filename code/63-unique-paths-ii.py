@@ -3,10 +3,10 @@ def uniquePathsWithObstacles(obstacleGrid):
     h = len(g)
     w = len(g[0])
 
-    s = [ [None for _ in xrange(w)] for _ in xrange(h)]
+    s = [ [None for _ in range(w)] for _ in range(h)]
 
-    for y in xrange(h):
-        for x in xrange(w):
+    for y in range(h):
+        for x in range(w):
             if g[y][x] == 1:
                 s[y][x] = 0
             elif x == 0 and y == 0:

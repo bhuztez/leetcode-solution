@@ -2,7 +2,7 @@ from misc import iter_palindrome
 
 
 def minCut(s):
-    steps = [None for _ in xrange(len(s)+1)]
+    steps = [None for _ in range(len(s)+1)]
     steps[0] = 0
 
     for b, e in iter_palindrome(s):

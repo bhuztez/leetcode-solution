@@ -18,7 +18,7 @@ def wordBreak(s, dict):
     if not any(e==len(s) for _,e in paths):
         return []
 
-    parents = [[] for _ in xrange(len(s)+1)]
+    parents = [[] for _ in range(len(s)+1)]
     parents[0] = []
 
     for b,e in paths:

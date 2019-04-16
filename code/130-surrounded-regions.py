@@ -1,4 +1,5 @@
-def neighbours((x, y)):
+def neighbours(pos):
+    x, y = pos
     yield (x-1, y)
     yield (x, y-1)
     yield (x+1, y)
@@ -13,8 +14,8 @@ def solve(board):
     h = len(board)
 
     pos = set((x,y)
-           for y in xrange(h)
-           for x in xrange(w)
+           for y in range(h)
+           for x in range(w)
            if board[y][x] == 'O')
 
     queue = [(x,y)

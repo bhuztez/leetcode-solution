@@ -1,0 +1,28 @@
+os: linux
+language: python
+python:
+- 3.6
+- 3.7-dev
+
+matrix:
+  include:
+  - os: osx
+    language: generic
+    python: 3.6
+    before_install:
+    - curl -Lo python.pkg https://www.python.org/ftp/python/3.6.6/python-3.6.6-macosx10.6.pkg
+    - sudo installer -pkg python.pkg -target /
+    - /Applications/Python\ 3.6/Install\ Certificates.command
+    - export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.6/bin"
+  allow_failures:
+  - python: "3.7-dev"
+
+install:
+- pip3 install --verbose --no-index --process-dependency-links -r requirements.txt
+script:
+- cd code
+- python3 preprocess.py --debug --timestamps --submit
+cache:
+  pip: true
+  directories:
+  - $HOME/.cache/wronganswer/data

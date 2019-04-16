@@ -1,9 +1,9 @@
 def isValidSudoku(board):
     INDICES = (
-        [[(j,i) for i in xrange(9)] for j in xrange(9)] +
-        [[(i,j) for i in xrange(9)] for j in xrange(9)] +
-        [[(x+i,y+j) for i in xrange(0,3) for j in xrange(0,3)]
-         for x in xrange(0,9,3) for y in xrange(0,9,3)]
+        [[(j,i) for i in range(9)] for j in range(9)] +
+        [[(i,j) for i in range(9)] for j in range(9)] +
+        [[(x+i,y+j) for i in range(0,3) for j in range(0,3)]
+         for x in range(0,9,3) for y in range(0,9,3)]
     )
 
     for constraint in INDICES:

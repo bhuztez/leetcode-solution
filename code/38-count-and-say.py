@@ -29,6 +29,6 @@ def count_and_say(s):
 
 def countAndSay(n):
     s = '1'
-    for i in xrange(1, n):
+    for i in range(1, n):
         s = "".join("%d%s"%(r,c) for c, r in count_and_say(s))
     return s

@@ -12,7 +12,7 @@ def canJump(A):
 
     max_reachable = 0
 
-    for i in xrange(0, last):
+    for i in range(0, last):
         if not reach[i]:
             continue
 
@@ -21,7 +21,7 @@ def canJump(A):
         if reachable <= max_reachable:
             continue
 
-        for j in xrange(max_reachable+1, reachable+1):
+        for j in range(max_reachable+1, reachable+1):
             reach[j] = True
 
         max_reachable = reachable

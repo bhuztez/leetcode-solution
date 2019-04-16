@@ -4,7 +4,7 @@
 """
 
 def neighbour(word):
-    for n in xrange(len(word)):
+    for n in range(len(word)):
         for c in 'abcdefghijklmnopqrstuvwxyz':
             yield word[:n]+c+word[n+1:]
 

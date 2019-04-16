@@ -8,7 +8,7 @@ def largestRectangleArea(height):
     largest = 0
     stack = []
 
-    for i in xrange(len(height)):
+    for i in range(len(height)):
         h = height[i]
         s = i
 

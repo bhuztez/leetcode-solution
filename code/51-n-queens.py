@@ -13,8 +13,8 @@ def is_primary(k):
 
 def make_chess_board(s, n):
     board = [
-        ["." for _ in xrange(n)]
-        for _ in xrange(n) ]
+        ["." for _ in range(n)]
+        for _ in range(n) ]
     for x, y in s:
         board[y][x] = "Q"
     return map("".join, board)
@@ -22,18 +22,18 @@ def make_chess_board(s, n):
 
 def solveNQueens(n):
     cols = (
-        [ ("x", x) for x in xrange(n) ] +
-        [ ("y", y) for y in xrange(n) ] +
-        [ ("c", c) for c in xrange(2*n-1) ] +
-        [ ("d", d) for d in xrange(-n+1,n) ]
+        [ ("x", x) for x in range(n) ] +
+        [ ("y", y) for y in range(n) ] +
+        [ ("c", c) for c in range(2*n-1) ] +
+        [ ("d", d) for d in range(-n+1,n) ]
     )
 
     Cols = {c:set() for c in cols}
 
     Rows = {
         (x,y): [("x", x), ("y", y), ("c", x+y), ("d", x-y)]
-        for x in xrange(n)
-        for y in xrange(n)}
+        for x in range(n)
+        for y in range(n)}
 
     for r, cols in Rows.iteritems():
         for c in cols:

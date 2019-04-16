@@ -3,10 +3,10 @@ def minPathSum(grid):
     h = len(g)
     w = len(g[0])
 
-    s = [ [0 for _ in xrange(w)] for _ in xrange(h)]
+    s = [ [0 for _ in range(w)] for _ in range(h)]
 
-    for y in xrange(h):
-        for x in xrange(w):
+    for y in range(h):
+        for x in range(w):
             if x == 0 and y == 0:
                 s[0][0] += g[0][0]
             elif x == 0:

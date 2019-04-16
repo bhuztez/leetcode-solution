@@ -1,6 +1,6 @@
 def p(m,n):
     r = 1
-    for i in xrange(m, m-n, -1):
+    for i in range(m, m-n, -1):
         r *= i
     return r
 
@@ -17,7 +17,7 @@ def product(*args):
 
 
 def _to_factorial(k, n):
-    for i in xrange(1, n+1):
+    for i in range(1, n+1):
         yield k % i
         k /= i
 
@@ -44,7 +44,7 @@ def perm(l, n):
     if n == 0:
         yield ()
 
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         if i > 0 and l[i] == l[i-1]:
             continue
 
@@ -56,7 +56,7 @@ def comb(l, n):
     if n == 0:
         yield ()
     else:
-        for i in xrange(len(l)):
+        for i in range(len(l)):
             if i > 0 and l[i] == l[i-1]:
                 continue
 
@@ -70,7 +70,7 @@ def next_permutation(lst):
     if length <= 1:
         return lst
 
-    for k in xrange(length-1, 0, -1):
+    for k in range(length-1, 0, -1):
         if lst[k-1] < lst[k]:
             break
     else:
@@ -79,7 +79,7 @@ def next_permutation(lst):
     l = k
     k -= 1
 
-    for m in xrange(l+1, length):
+    for m in range(l+1, length):
         if lst[k] < lst[m]:
             l = m
 

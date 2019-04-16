@@ -11,7 +11,7 @@ def iter_segs(n, parents):
 
 
 def partition(s):
-    parents = [[] for _ in xrange(len(s)+1)]
+    parents = [[] for _ in range(len(s)+1)]
     parents[0] = []
 
     for b, e in iter_palindrome(s):

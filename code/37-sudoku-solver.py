@@ -3,12 +3,12 @@ from algorithm_x import select, solve
 
 def solveSudoku(board):
     cols = (
-        [ ("rc", j, i) for i in xrange(1,10) for j in xrange(1,10)] +
-        [ ("rn", i, j) for i in xrange(1,10) for j in xrange(1,10)] +
-        [ ("cn", i, j) for i in xrange(1,10) for j in xrange(1,10)] +
-        [ ("bn", i, j) for i in xrange(1,10) for j in xrange(1,10)])
+        [ ("rc", j, i) for i in range(1,10) for j in range(1,10)] +
+        [ ("rn", i, j) for i in range(1,10) for j in range(1,10)] +
+        [ ("cn", i, j) for i in range(1,10) for j in range(1,10)] +
+        [ ("bn", i, j) for i in range(1,10) for j in range(1,10)])
 
-    rows = [ (j,i,k) for i in xrange(1,10) for j in xrange(1,10) for k in xrange(1,10) ]
+    rows = [ (j,i,k) for i in range(1,10) for j in range(1,10) for k in range(1,10) ]
 
     Rows = {}
 

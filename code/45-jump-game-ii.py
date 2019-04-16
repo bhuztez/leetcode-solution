@@ -10,7 +10,7 @@ def jump(A):
 
     max_reachable = 0
 
-    for i in xrange(0, last):
+    for i in range(0, last):
         if steps[i] is None:
             continue
 
@@ -19,7 +19,7 @@ def jump(A):
         if reachable <= max_reachable:
             continue
 
-        for j in xrange(max_reachable+1, reachable+1):
+        for j in range(max_reachable+1, reachable+1):
             steps[j] = steps[i] + 1
 
         max_reachable = reachable
