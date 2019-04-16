@@ -171,9 +171,9 @@ def main():
     oj = 'leetcode.com'
     env = 'python3'
 
-    @task(f"submit {filename}")
+    @task("submit {filename}")
     async def submit(filename):
-        data = preprocess(name).encode()
+        data = preprocess(filename).encode()
 
         token = await profile.submit(oj, pid, env, data)
         status = None
@@ -184,7 +184,7 @@ def main():
         if extra:
             print(extra[0])
 
-    @task(f"submit")
+    @task("submit")
     async def _main():
         for name in names:
             await submit(name)
