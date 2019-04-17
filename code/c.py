@@ -139,6 +139,7 @@ async def _main(mod, argv):
     env = 'python3'
 
     def _names():
+        import os
         return [
             name
             for name in os.listdir(os.path.dirname(os.path.abspath(__file__)))
@@ -154,9 +155,9 @@ async def _main(mod, argv):
     @task("Submit")
     async def Submit(agent: Argument("--agent", default='localhost'),
                      names: Argument(nargs='*')):
-        for name in names or _names:
-            data = preprocess(filename).encode()
-            pid = filename.split("-", 1)[1]
+        for name in names or _names():
+            data = preprocess(name).encode()
+            pid = name.split("-", 1)[1]
             if pid.endswith(".py"):
                 pid = pid[:-3]
             message, extra = await profile.submit(oj, pid, env, data)
