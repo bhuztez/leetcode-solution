@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import ast
 import symtable
 
@@ -126,74 +128,50 @@ def preprocess(filename):
          SOLUTION.format(name=fun_name, args=", ".join(args)).strip()])
 
 
-def main():
-    import os
-    import logging
-    from argparse import ArgumentParser
-
-    logging.captureWarnings(True)
-    logger = logging.getLogger('')
-    logger.setLevel(logging.INFO)
-    handler = logging.StreamHandler()
-    logger.addHandler(handler)
-
-
-    parser = ArgumentParser()
-    parser.add_argument("--timestamps", action="store_true", default=False, help="show timestamp on each log line")
-    parser.add_argument("--debug", action="store_true", default=False, help="turn on debug logging")
-    parser.add_argument("--submit", action="store_true", default=False, help='submit solution')
-    parser.add_argument("filename", nargs="*")
-
-    args = parser.parse_args()
-    names = args.filename
-    if not names:
-        names = [
-            name
-            for name in os.listdir(os.path.dirname(__file__) or '.')
-            if name.endswith(".py") and name.split("-",1)[0].isdigit() ]
-
-    if args.timestamps:
-        formatter = logging.Formatter(fmt='{asctime} {message}',datefmt='%Y-%m-%d %H:%M:%S', style='{')
-        handler.setFormatter(formatter)
-    if args.debug:
-        logger.setLevel(logging.DEBUG)
-
-    if not args.submit:
-        logger.info(name)
-        print(preprocess(name))
-        return
-
-    from miasma import task
+async def _main(mod, argv):
+    from miasma import task, Argument
     from wronganswer import Profile
-    profile = Profile()
-    profile.set_debug(args.debug)
 
+    command = mod.command
+
+    profile = Profile()
     oj = 'leetcode.com'
     env = 'python3'
 
-    @task("submit {filename}")
-    async def submit(filename):
-        data = preprocess(filename).encode()
-        pid = filename.split("-", 1)[1]
-        if pid.endswith(".py"):
-            pid = pid[:-3]
+    def _names():
+        return [
+            name
+            for name in os.listdir(os.path.dirname(os.path.abspath(__file__)))
+            if name.endswith(".py") and name.split("-",1)[0].isdigit() ]
 
-        token = await profile.submit(oj, pid, env, data)
-        status = None
-        while status is None:
-            status, message, *extra = await profile.status(oj, token)
-        assert status, message
-        print(message)
-        if extra:
-            print(extra[0])
+    @command
+    @task("Preprocess")
+    async def Preprocess(names: Argument(nargs='*')):
+        for name in names or names():
+            print(preprocess(name))
 
-    @task("submit")
-    async def _main():
-        for name in names:
-            await submit(name)
+    @command
+    @task("Submit")
+    async def Submit(agent: Argument("--agent", default='localhost'),
+                     names: Argument(nargs='*')):
+        for name in names or _names:
+            data = preprocess(filename).encode()
+            pid = filename.split("-", 1)[1]
+            if pid.endswith(".py"):
+                pid = pid[:-3]
+            message, extra = await profile.submit(oj, pid, env, data)
+            print(message)
+            print(extra)
 
-    _main().run(retry=3)
+    cmd, args = command.parse(argv)
+    profile.set_debug(args.debug)
+    return cmd, args
 
+
+def main():
+    from miasma import Command
+    command = Command(description="leetcode solutions")
+    command.run(_main)
 
 if __name__ == '__main__':
     main()
