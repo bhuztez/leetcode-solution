@@ -1,8 +1,24 @@
 #!/usr/bin/env python3
 
+if __name__ == '__main__':
+    import sys
+    import os
+
+    try:
+        import miasma
+    except ImportError:
+        ROOT=os.path.dirname(os.path.abspath(__file__))
+        sys.path.append(os.path.dirname(ROOT)+"/miasma")
+        sys.path.append(os.path.dirname(ROOT)+"/wronganswer")
+
+    from wronganswer.project import main
+    main("Leetcode Solutions")
+    quit()
+
+
 import ast
 import symtable
-
+import os
 
 def get_stmts(module):
     lastlineno = None
@@ -28,7 +44,7 @@ def get_child_tables(table):
 
 def parse_module(module_name):
     filename = module_name + ".py"
-    with open(filename, 'r') as f:
+    with open(os.path.join(SOLUTIONS_DIR, filename), 'r') as f:
         source = f.read()
 
     srclines = source.splitlines()
@@ -40,9 +56,10 @@ def parse_module(module_name):
     imports = dict(get_imports(module))
 
     def parse_dependencies(name):
+        import builtins
         for tab in get_child_tables(table.lookup(name).get_namespace()):
             for g in tab.get_globals():
-                if g in dir(__builtins__):
+                if g in dir(builtins):
                     continue
 
                 if table.lookup(g).is_imported():
@@ -93,7 +110,7 @@ def load_functions(module_name):
 def get_function_args(module_name, fun_name):
     filename = module_name + ".py"
 
-    with open(filename, 'r') as f:
+    with open(os.path.join(SOLUTIONS_DIR, filename), 'r') as f:
         source = f.read()
 
     module = ast.parse(source, filename)
@@ -116,6 +133,8 @@ class Solution:
 """
 
 def preprocess(filename):
+    assert get_solution_info(filename) is not None
+    filename = os.path.basename(filename)
     if filename.endswith(".py"):
         module_name = filename[:-3]
     else:
@@ -128,51 +147,23 @@ def preprocess(filename):
          SOLUTION.format(name=fun_name, args=", ".join(args)).strip()])
 
 
-async def _main(mod, argv):
-    from miasma import task, Argument
-    from wronganswer import Profile
-
-    command = mod.command
-
-    profile = Profile()
-    oj = 'leetcode.com'
-    env = 'python3'
-
-    def _names():
-        import os
-        return [
-            name
-            for name in os.listdir(os.path.dirname(os.path.abspath(__file__)))
-            if name.endswith(".py") and name.split("-",1)[0].isdigit() ]
-
-    @command
-    @task("Preprocess")
-    async def Preprocess(names: Argument(nargs='*')):
-        for name in names or names():
-            print(preprocess(name))
-
-    @command
-    @task("Submit")
-    async def Submit(agent: Argument("--agent", default='localhost'),
-                     names: Argument(nargs='*')):
-        for name in names or _names():
-            data = preprocess(name).encode()
-            pid = name.split("-", 1)[1]
-            if pid.endswith(".py"):
-                pid = pid[:-3]
-            message, extra = await profile.submit(oj, pid, env, data)
-            print(message)
-            print(extra)
-
-    cmd, args = command.parse(argv)
-    profile.set_debug(args.debug)
-    return cmd, args
+def get_solution_info(name):
+    name = os.path.basename(name)
+    n, *pid = name.split("-", 1)
+    if not pid:
+        return
+    pid = pid[0]
+    if not n.isdigit():
+        return
+    if not pid.endswith(".py"):
+        return
+    pid = pid[:-3]
+    return 'leetcode.com', pid
 
 
-def main():
-    from miasma import Command
-    command = Command(description="leetcode solutions")
-    command.run(_main)
+async def ReadSubmission(name, recompile):
+    source = preprocess(name).encode()
+    return 'python3', source
 
-if __name__ == '__main__':
-    main()
+command(Preview)
+command(Submit)
