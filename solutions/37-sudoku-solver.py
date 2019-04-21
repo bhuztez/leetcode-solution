@@ -13,7 +13,7 @@ def solveSudoku(board):
     Rows = {}
 
     for x,y,n in rows:
-        Rows[(x,y,n)] = [("rc",x,y), ("rn", x,n), ("cn", y,n), ("bn", 1+(x-1)/3+(y-1)/3*3, n)]
+        Rows[(x,y,n)] = [("rc",x,y), ("rn", x,n), ("cn", y,n), ("bn", 1+(x-1)//3+(y-1)//3*3, n)]
 
     Cols = {c:set() for c in cols}
 

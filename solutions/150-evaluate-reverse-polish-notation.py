@@ -5,7 +5,7 @@ def evalRPN(tokens):
         "+": lambda a,b: a+b,
         "-": lambda a,b: a-b,
         "*": lambda a,b: a*b,
-        "/": lambda a,b: -(-a/b) if (a*b)<0 else a/b
+        "/": lambda a,b: -(-a//b) if (a*b)<0 else a//b
     }
 
     stack = []

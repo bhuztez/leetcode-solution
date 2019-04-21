@@ -9,4 +9,4 @@ def fourSum(num, target):
     num1 = list(enumerate_t(num))
     num2 = comb2(num1)
     dict_add_by_distance(d, num2, target)
-    return map(list, frozenset(indices_to_num(get_all_pairs(d,target,4),num)))
+    return list(map(list, frozenset(indices_to_num(get_all_pairs(d,target,4),num))))

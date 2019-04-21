@@ -13,7 +13,7 @@ def pow(x, n):
         x = 1.0/x
         n = -n
 
-    for a, b in izip(square(x), int2digits(n, 2)):
+    for a, b in zip(square(x), int2digits(n, 2)):
         if b:
             r *= a
 

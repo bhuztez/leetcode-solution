@@ -1,4 +1,4 @@
-from leetcode import RandomListNode
+from leetcode import RandomListNode as Node
 
 def copyRandomList(head):
     if head is None:
@@ -7,7 +7,7 @@ def copyRandomList(head):
     h = head
     d = {}
     while h is not None:
-        d[h] = RandomListNode(h.label)
+        d[h] = Node(h.label)
         h = h.next
 
     h = head

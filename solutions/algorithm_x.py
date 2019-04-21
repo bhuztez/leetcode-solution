@@ -35,7 +35,7 @@ def solve(Cols, Rows, solution, is_primary=None):
         yield solution
 
     else:
-        rows = min(primaries.itervalues(), key=len)
+        rows = min(primaries.values(), key=len)
         for r in list(rows):
             solution.append(r)
 

@@ -32,7 +32,7 @@ def find_pairs(l, target, sz):
             yield tuple(sorted(e))
 
 def get_all_pairs(d, target, sz):
-    for l in d.itervalues():
+    for l in d.values():
         for e in find_pairs(l, target, sz):
             yield e
 

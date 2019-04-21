@@ -34,8 +34,7 @@ def get_imports(module):
             assert stmt.level == 0
             assert '.' not in stmt.module
             for alias in stmt.names:
-                assert alias.asname is None
-                yield (alias.name, (stmt.module,alias.name))
+                yield (alias.asname or alias.name, (stmt.module,alias.name))
 
 
 def get_child_tables(table):
@@ -161,6 +160,7 @@ def get_solution_info(name):
     return 'leetcode.com', pid
 
 
+@task("Read submission of {name}")
 async def ReadSubmission(name, recompile):
     source = preprocess(name).encode()
     return 'python3', source

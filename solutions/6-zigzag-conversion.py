@@ -3,8 +3,6 @@
 'PAHNAPLSIIGYIR'
 """
 
-from iterator import izip
-
 def convert(s, nRows):
     if nRows == 1:
         return s
@@ -15,7 +13,7 @@ def convert(s, nRows):
     r = l[0]
 
     for i in range(1, nRows-1):
-        r += "".join(a+b for a,b in izip(l[i], l[n-i]))
+        r += "".join(a+b for a,b in zip(l[i], l[n-i]))
 
     r += l[nRows-1]
     return "".join(r.split(" "))

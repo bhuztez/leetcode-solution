@@ -9,7 +9,7 @@ def iter_digit(s):
         yield int(c)
 
 
-def atoi(str):
+def myAtoi(str):
     s = str.strip()
     if not s:
         return 0

@@ -10,4 +10,4 @@
 from combinatorics import next_permutation
 
 def nextPermutation(num):
-    return next_permutation(num)
+    next_permutation(num)

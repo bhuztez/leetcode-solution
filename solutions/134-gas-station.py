@@ -1,7 +1,5 @@
-from iterator import izip
-
 def canCompleteCircuit(gas, cost):
-    change = [(g-c) for g, c in izip(gas, cost)]
+    change = [(g-c) for g, c in zip(gas, cost)]
     total = 0
     stops = len(change)
     l, r = 0, 0

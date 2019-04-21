@@ -10,12 +10,6 @@ def chain(*args):
             yield e
 
 
-def izip(*args):
-    iterators = map(iter, args)
-    while iterators:
-        yield tuple(map(next, iterators))
-
-
 def izip_longest(*args, **kwargs):
     fill=kwargs["fill"]
     counter = [len(args)-1]
@@ -91,7 +85,7 @@ def reverse_by_n(it, n):
 
 
 def imap(f, *args):
-    it = izip(*args)
+    it = zip(*args)
     for e in it:
         yield f(*e)
 

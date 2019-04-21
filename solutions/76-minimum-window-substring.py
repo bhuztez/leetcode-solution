@@ -22,7 +22,7 @@ def minWindow(S, T):
 
             r += 1
 
-            if all((v<=0) for v in need.itervalues()):
+            if all((v<=0) for v in need.values()):
                 break
         else:
             break

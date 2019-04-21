@@ -22,9 +22,11 @@ def search_range_right(r, midpoint):
     return (midpoint+1, end)
 
 
-def binary_search(l, cmp, r=None):
-    if not callable(cmp):
-        cmp = cmp.__cmp__
+def binary_search(l, y, r=None):
+    if not callable(y):
+        cmp = lambda x: (x<y)-(x>y)
+    else:
+        cmp = y
 
     if r is None:
         r = search_range(0, len(l))

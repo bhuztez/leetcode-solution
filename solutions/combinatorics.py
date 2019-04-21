@@ -6,7 +6,7 @@ def p(m,n):
 
 
 def c(m,n):
-    return p(m,n)/p(n,n)
+    return p(m,n)//p(n,n)
 
 
 def product(*args):
@@ -19,7 +19,7 @@ def product(*args):
 def _to_factorial(k, n):
     for i in range(1, n+1):
         yield k % i
-        k /= i
+        k //= i
 
 
 def to_factorial(k, n):
@@ -68,13 +68,14 @@ def next_permutation(lst):
     length = len(lst)
 
     if length <= 1:
-        return lst
+        return
 
     for k in range(length-1, 0, -1):
         if lst[k-1] < lst[k]:
             break
     else:
-        return lst[::-1]
+        lst.reverse()
+        return
 
     l = k
     k -= 1
@@ -85,4 +86,3 @@ def next_permutation(lst):
 
     lst[k], lst[l] = lst[l], lst[k]
     lst[k+1:] = lst[:k:-1]
-    return lst

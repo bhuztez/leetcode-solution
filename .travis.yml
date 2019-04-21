@@ -18,7 +18,7 @@ matrix:
   - python: "3.7-dev"
 
 install:
-- pip3 install --verbose --no-index --process-dependency-links -r requirements.txt
+- pip3 install --verbose -r requirements.txt
 script:
 - cd code
 - python3 c.py --debug --timestamps submit
