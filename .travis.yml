@@ -20,8 +20,7 @@ matrix:
 install:
 - pip3 install --verbose -r requirements.txt
 script:
-- cd code
-- python3 c.py --debug --timestamps submit
+- python3 c.py -v --debug --timestamps submit
 cache:
   pip: true
   directories:
