@@ -7,7 +7,7 @@ def copyRandomList(head):
     h = head
     d = {}
     while h is not None:
-        d[h] = Node(h.label)
+        d[h] = Node(h.val, None, None)
         h = h.next
 
     h = head
