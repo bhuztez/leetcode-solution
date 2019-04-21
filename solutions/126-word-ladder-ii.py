@@ -15,7 +15,7 @@ def iter_paths(n, parents):
 
 def findLadders(start, end, dict):
     visited = set([start])
-    remain = set([end])
+    remain = set()
     remain.update(dict)
     remain.discard(start)
 
