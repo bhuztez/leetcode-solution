@@ -35,7 +35,7 @@ def totalNQueens(n):
         for x in range(n)
         for y in range(n)}
 
-    for r, cols in Rows.iteritems():
+    for r, cols in Rows.items():
         for c in cols:
             Cols[c].add(r)
 

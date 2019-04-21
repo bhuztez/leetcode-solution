@@ -17,7 +17,7 @@ def solveSudoku(board):
 
     Cols = {c:set() for c in cols}
 
-    for r, cols in Rows.iteritems():
+    for r, cols in Rows.items():
         for c in cols:
             Cols[c].add(r)
 

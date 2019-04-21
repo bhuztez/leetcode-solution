@@ -19,7 +19,7 @@ def lengthOfLongestSubstring(s):
             longest = max(current, longest)
             current = i - l
             last = { k:v
-                     for (k,v) in last.iteritems()
+                     for (k,v) in last.items()
                      if v > l}
 
     return max(current, longest)

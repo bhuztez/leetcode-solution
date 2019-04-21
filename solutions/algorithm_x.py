@@ -25,7 +25,7 @@ def deselect(Cols, Rows, r, cols):
 def solve(Cols, Rows, solution, is_primary=None):
     if is_primary:
         primaries = {
-            k:v for k, v in Cols.iteritems()
+            k:v for k, v in Cols.items()
             if is_primary(k)
         }
     else:
