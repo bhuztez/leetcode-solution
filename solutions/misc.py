@@ -24,10 +24,10 @@ def spiral(first, x, y, m, n):
 
 def merge_intervals(intervals):
     last = intervals[0]
-    
+
     for c in intervals[1:]:
-        if last.end >= c.start:
-            last.end = max(c.end, last.end)
+        if last[1] >= c[0]:
+            last[1] = max(c[1], last[1])
         else:
             yield last
             last = c
